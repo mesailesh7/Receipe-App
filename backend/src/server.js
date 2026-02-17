@@ -3,6 +3,7 @@ import "dotenv/config";
 import {ENV} from "./config/env.js";
 import {db} from "./config/db.js";
 import {favoritesTable} from "./db/schema.js";
+import {and, eq} from "drizzle-orm";
 
 const app = express();
 //to get the request from the body
@@ -38,6 +39,24 @@ app.post("/api/favorites", async (req, res) => {
     } catch (error) {
         console.log("Error adding favorite", error)
         res.status(500).json({error: error.message});
+    }
+})
+
+app.delete("/api/favorites/:userId/:recipeId", async (req, res) => {
+    try {
+        const {userId, recipeId} = req.params;
+
+        await db
+            .delete(favoritesTable)
+            .where(
+                and(eq(favoritesTable.userId, userId), eq(favoritesTable.recipeId, parseInt(recipeId)))
+            )
+
+        res.status(200).json({message: "Favorite deleted successfully"});
+
+    } catch (e) {
+        console.log("Error deleteing favorites", req.params.userId)
+        res.status(500).json({error: e});
     }
 })
 
