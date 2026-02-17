@@ -61,6 +61,22 @@ app.delete("/api/favorites/:userId/:recipeId", async (req, res) => {
 })
 
 
+app.get("/api/favorites/:userId", async (req, res) => {
+
+    try {
+        const {userId} = req.params;
+
+        const userFavorites = await db.select().from(favoritesTable).where(eq(favoritesTable.userId, userId));
+
+        res.status(200).json(userFavorites);
+        // res.json(userFavorites);
+
+    } catch (e) {
+        console.log("Error adding favorite", e);
+        res.status(500).json({error: e});
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT} `);
 });
