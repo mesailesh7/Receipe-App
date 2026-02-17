@@ -1,0 +1,5 @@
+// To generate tables
+npx drizzle-kit generate
+
+// to migrate data to database
+npx drizzle-kit migrate

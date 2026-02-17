@@ -1,0 +1,32 @@
+meta {
+  name: Favorites Post
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:5001/api/favorites?"userId"="123",&"recipeId"="456",&"title"="Yummy Chicken",&"image"="exampleimage.com",&"cookTime"="30 mins",&"servings"="3"
+  body: json
+  auth: none
+}
+
+params:query {
+  "\"userId\"": "123",
+  "\"recipeId\"": "456",
+  "\"title\"": "Yummy Chicken",
+  "\"image\"": "exampleimage.com",
+  "\"cookTime\"": "30 mins",
+  "\"servings\"": "3"
+}
+
+body:json {
+  {
+  "userId": "123",
+  "recipeId": "456",
+  "title": "Yummy Chicken",
+  "image": "exampleimage.com",
+  "cookTime": "30 mins",
+  "servings": "3"
+  }
+  
+}
